@@ -158,6 +158,11 @@ var budgetController = (function(){
             document.querySelector(element).insertAdjacentHTML('beforeend', newHTML);
         },
 
+        deleteListItem: function(selectorID){
+            var el = document.getElementById(selectorID);
+            el.parentNode.removeChild(el);
+        },
+
         clearFields: function(){
             var fields;
             var fieldsArr;
@@ -250,13 +255,14 @@ var budgetController = (function(){
             // DELETE FROM DATA
             budgetCtrl.deleteItem(type, ID);
             // DELETE FROM UI
+            UICtrl.deleteListItem(itemID);
             // UPDATE AND SHOW NEW BUDGET
+            updateBudget();
         }
     };
 
     return {
         init: function(){
-            console.log('App has started');
             UICtrl.displayBudget({
                 budget: 0,
                 totalInc: 0,
